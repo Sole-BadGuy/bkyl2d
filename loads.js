@@ -25,7 +25,10 @@ function loadExternalResource(url, type) {
 }
 
 // 加载 waifu.css live2d.min.js waifu-tips.js
-if (screen.width >= 768) {
+// 如果是admin开头就不用生成看板娘
+const rge = new RegExp('^/admin');
+console.log(rge.test(location.pathname));
+if (screen.width >= 768 && !rge.test(location.pathname)) {
 	Promise.all([
 		loadExternalResource(live2d_path + "waifu.css", "css"),
 		loadExternalResource(live2d_path + "live2d.min.js", "js"),
